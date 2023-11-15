@@ -40,6 +40,7 @@ export const AddTaskBtn = styled.button`
   padding: 1rem;
   background-color: inherit;
   font-weight: bold;
+  cursor: pointer;
   &:hover {
     border-radius: 1rem;
     background-color: #010101;

@@ -1,14 +1,17 @@
-import { Column, Id } from "./KanbanBoard";
+import { Column, Id, Task } from "./KanbanBoard";
 import TrashIcon from "../icons/TrashIcon";
 import PlusIcon from "../icons/PlusIcon";
 import { AddTaskBtn, ColumnCard, ColumnContent, ColumnTitle, IconBox, TrashIconBox, TrashIconBoxBtn } from "./ColumnContainer.style";
+import TaskCard from "./TaskCard";
 
 interface Props {
   column: Column;
+  tasks: Task[];
   deleteColumn: (id: Id) => void;
+  createNewTask: () => void;
 }
 
-const ColumnContainer = ({ column, deleteColumn }: Props) => {
+const ColumnContainer = ({ column, tasks, deleteColumn, createNewTask }: Props) => {
   return (
     <ColumnCard>
       <ColumnTitle>
@@ -19,8 +22,12 @@ const ColumnContainer = ({ column, deleteColumn }: Props) => {
           </TrashIconBox>
         </TrashIconBoxBtn>
       </ColumnTitle>
-      <ColumnContent></ColumnContent>
-      <AddTaskBtn>
+      <ColumnContent>
+        {tasks.map((task) => (
+          <TaskCard key={task.id} task={task} />
+        ))}
+      </ColumnContent>
+      <AddTaskBtn onClick={() => createNewTask()}>
         <IconBox>
           <PlusIcon />
         </IconBox>

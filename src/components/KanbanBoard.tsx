@@ -10,8 +10,16 @@ export type Column = {
   title: string;
 };
 
+export type Task = {
+  id: Id;
+  title: string;
+  description: string;
+};
+
 const KanbanBoard = () => {
   const [columns, setColumns] = useState<Column[]>([]);
+  const [tasks, setTasks] = useState<Task[]>([]);
+
   const createNewColumn = () => {
     const AddColumn: Column = {
       id: generatedId(),
@@ -27,12 +35,21 @@ const KanbanBoard = () => {
     return Math.floor(Math.random() * 10001);
   };
 
+  const createNewTask = () => {
+    const AddTask: Task = {
+      id: generatedId(),
+      title: `Task ${tasks.length + 1}`,
+      description: `Task ${tasks.length + 1} description`,
+    };
+    setTasks([...tasks, AddTask]);
+  };
+
   return (
     <KanbanBoardContainer>
       <KanbanBoardWrapper>
         <KanbanBoardBox>
           {columns.map((col) => (
-            <ColumnContainer key={col.id} column={col} deleteColumn={deleteColumn} />
+            <ColumnContainer key={col.id} column={col} tasks={tasks} deleteColumn={deleteColumn} createNewTask={createNewTask} />
           ))}
         </KanbanBoardBox>
         <KanbanBoardAddColumnBtn onClick={createNewColumn}>
