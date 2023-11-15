@@ -12,6 +12,7 @@ export type Column = {
 
 export type Task = {
   id: Id;
+  columnId: Id;
   title: string;
   description: string;
 };
@@ -35,9 +36,10 @@ const KanbanBoard = () => {
     return Math.floor(Math.random() * 10001);
   };
 
-  const createNewTask = () => {
+  const createNewTask = (columnId: Id) => {
     const AddTask: Task = {
       id: generatedId(),
+      columnId,
       title: `Task ${tasks.length + 1}`,
       description: `Task ${tasks.length + 1} description`,
     };
@@ -49,7 +51,7 @@ const KanbanBoard = () => {
       <KanbanBoardWrapper>
         <KanbanBoardBox>
           {columns.map((col) => (
-            <ColumnContainer key={col.id} column={col} tasks={tasks} deleteColumn={deleteColumn} createNewTask={createNewTask} />
+            <ColumnContainer key={col.id} column={col} tasks={tasks.filter((task) => task.columnId === col.id)} deleteColumn={deleteColumn} createNewTask={createNewTask} />
           ))}
         </KanbanBoardBox>
         <KanbanBoardAddColumnBtn onClick={createNewColumn}>

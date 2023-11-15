@@ -8,7 +8,7 @@ interface Props {
   column: Column;
   tasks: Task[];
   deleteColumn: (id: Id) => void;
-  createNewTask: () => void;
+  createNewTask: (columnId: Id) => void;
 }
 
 const ColumnContainer = ({ column, tasks, deleteColumn, createNewTask }: Props) => {
@@ -27,7 +27,7 @@ const ColumnContainer = ({ column, tasks, deleteColumn, createNewTask }: Props) 
           <TaskCard key={task.id} task={task} />
         ))}
       </ColumnContent>
-      <AddTaskBtn onClick={() => createNewTask()}>
+      <AddTaskBtn onClick={() => createNewTask(column.id)}>
         <IconBox>
           <PlusIcon />
         </IconBox>
