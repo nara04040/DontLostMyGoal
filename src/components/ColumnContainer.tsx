@@ -1,18 +1,19 @@
-import { Column } from "./KanbanBoard";
+import { Column, Id } from "./KanbanBoard";
 import TrashIcon from "../icons/TrashIcon";
 import PlusIcon from "../icons/PlusIcon";
 import { AddTaskBtn, ColumnCard, ColumnContent, ColumnTitle, IconBox, TrashIconBox, TrashIconBoxBtn } from "./ColumnContainer.style";
 
 interface Props {
   column: Column;
+  deleteColumn: (id: Id) => void;
 }
 
-const ColumnContainer = ({ column }: Props) => {
+const ColumnContainer = ({ column, deleteColumn }: Props) => {
   return (
     <ColumnCard>
       <ColumnTitle>
         {column.title}
-        <TrashIconBoxBtn>
+        <TrashIconBoxBtn onClick={() => deleteColumn(column.id)}>
           <TrashIconBox>
             <TrashIcon />
           </TrashIconBox>

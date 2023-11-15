@@ -3,7 +3,7 @@ import { IconBox, KanbanBoardAddColumnBtn, KanbanBoardBox, KanbanBoardContainer,
 import ColumnContainer from "./ColumnContainer";
 import PlusIcon from "../icons/PlusIcon";
 
-type Id = string | number;
+export type Id = string | number;
 
 export type Column = {
   id: Id;
@@ -19,7 +19,10 @@ const KanbanBoard = () => {
     };
     setColumns([...columns, AddColumn]);
   };
-
+  const deleteColumn = (id: Id) => {
+    const filterColumns = columns.filter((col) => col.id !== id);
+    setColumns(filterColumns);
+  };
   const generatedId = (): Id => {
     return Math.floor(Math.random() * 10001);
   };
@@ -29,7 +32,7 @@ const KanbanBoard = () => {
       <KanbanBoardWrapper>
         <KanbanBoardBox>
           {columns.map((col) => (
-            <ColumnContainer key={col.id} column={col} />
+            <ColumnContainer key={col.id} column={col} deleteColumn={deleteColumn} />
           ))}
         </KanbanBoardBox>
         <KanbanBoardAddColumnBtn onClick={createNewColumn}>
