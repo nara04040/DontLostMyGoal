@@ -15,7 +15,6 @@ const Main = () => {
 export default Main;
 
 const MainContainer = styled.div`
-  background-color: green;
   height: 100vh;
   display: flex;
   overflow-x: scroll;

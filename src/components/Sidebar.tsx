@@ -22,7 +22,7 @@ const SidebarContainer = styled.div`
   /* background-color: ${({ theme }) => theme.background}; */
   background-color: red;
   position: fixed;
-  left: 0;
+  left: 8px;
   width: 260px;
   height: 100vh;
   align-content: center;
