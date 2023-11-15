@@ -6,7 +6,7 @@ export const Header = () => {
     <HeaderContainer>
       <LeftSide>
         <LogoImage src="/logo.jpeg" />
-        <HeaderTitle>This is Title</HeaderTitle>
+        <HeaderTitle>Don't Lost Goal</HeaderTitle>
         <KanbanBoardNameContainer>
           <BoardName>`board.name이 들어옵니다.`</BoardName>
         </KanbanBoardNameContainer>
@@ -19,8 +19,7 @@ const HeaderContainer = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid black;
-  background-color: yellow;
+  padding-left: 1rem;
 `;
 
 const LeftSide = styled.div`
@@ -41,7 +40,7 @@ const HeaderTitle = styled.h1`
   display: none;
   font-weight: bold;
   font-family: sans-serif;
-
+  font-size: 1.5rem;
   @media (min-width: 768px) {
     display: inline-block;
     font-size: 2.5rem;

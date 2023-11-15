@@ -1,4 +1,3 @@
-import React from "react";
 import Sidebar from "./Sidebar";
 import KanbanBoard from "./KanbanBoard";
 import styled from "styled-components";

@@ -20,7 +20,7 @@ export default Sidebar;
 
 const SidebarContainer = styled.div`
   /* background-color: ${({ theme }) => theme.background}; */
-  background-color: red;
+  background-color: #f4f5f7;
   position: fixed;
   left: 8px;
   width: 260px;
