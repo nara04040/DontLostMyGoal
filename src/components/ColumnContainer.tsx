@@ -9,17 +9,30 @@ interface Props {
   column: Column;
   tasks: Task[];
   deleteColumn: (id: Id) => void;
+  updateColumn: (id: Id, title: string) => void;
   createNewTask: (columnId: Id) => void;
 }
 
-const ColumnContainer = ({ column, tasks, deleteColumn, createNewTask }: Props) => {
+const ColumnContainer = ({ column, tasks, deleteColumn, updateColumn, createNewTask }: Props) => {
   const [editMode, setEditMode] = useState<boolean>(false);
 
   return (
     <ColumnCard>
       <ColumnTitle onClick={() => setEditMode(true)}>
         {!editMode && column.title}
-        {editMode && <input type="text" />}
+        {editMode && (
+          <input
+            type="text"
+            autoFocus
+            value={column.title}
+            onChange={(e) => updateColumn(column.id, e.target.value)}
+            onBlur={() => setEditMode(false)}
+            onKeyDown={(e) => {
+              if (e.key !== "Enter") return;
+              setEditMode(false);
+            }}
+          />
+        )}
         <TrashIconBoxBtn onClick={() => deleteColumn(column.id)}>
           <TrashIconBox>
             <TrashIcon />

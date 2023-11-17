@@ -32,6 +32,15 @@ const KanbanBoard = () => {
     const filterColumns = columns.filter((col) => col.id !== id);
     setColumns(filterColumns);
   };
+  const updateColumn = (id: Id, title: string) => {
+    const newColumnsTitle = columns.map((col) => {
+      if (col.id === id) {
+        return { ...col, title };
+      }
+      return col;
+    });
+    setColumns(newColumnsTitle);
+  };
   const generatedId = (): Id => {
     return Math.floor(Math.random() * 10001);
   };
@@ -51,7 +60,7 @@ const KanbanBoard = () => {
       <KanbanBoardWrapper>
         <KanbanBoardBox>
           {columns.map((col) => (
-            <ColumnContainer key={col.id} column={col} tasks={tasks.filter((task) => task.columnId === col.id)} deleteColumn={deleteColumn} createNewTask={createNewTask} />
+            <ColumnContainer key={col.id} column={col} tasks={tasks.filter((task) => task.columnId === col.id)} deleteColumn={deleteColumn} updateColumn={updateColumn} createNewTask={createNewTask} />
           ))}
         </KanbanBoardBox>
         <KanbanBoardAddColumnBtn onClick={createNewColumn}>
