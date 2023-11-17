@@ -3,6 +3,7 @@ import TrashIcon from "../icons/TrashIcon";
 import PlusIcon from "../icons/PlusIcon";
 import { AddTaskBtn, ColumnCard, ColumnContent, ColumnTitle, IconBox, TrashIconBox, TrashIconBoxBtn } from "./ColumnContainer.style";
 import TaskCard from "./TaskCard";
+import { useState } from "react";
 
 interface Props {
   column: Column;
@@ -12,10 +13,13 @@ interface Props {
 }
 
 const ColumnContainer = ({ column, tasks, deleteColumn, createNewTask }: Props) => {
+  const [editMode, setEditMode] = useState<boolean>(false);
+
   return (
     <ColumnCard>
-      <ColumnTitle>
-        {column.title}
+      <ColumnTitle onClick={() => setEditMode(true)}>
+        {!editMode && column.title}
+        {editMode && <input type="text" />}
         <TrashIconBoxBtn onClick={() => deleteColumn(column.id)}>
           <TrashIconBox>
             <TrashIcon />
