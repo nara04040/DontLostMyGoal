@@ -12,10 +12,11 @@ export const SidebarContainer = styled.div`
 `;
 
 export const SidebarHeader = styled.div`
+  display: flex;
   color: #4b5563;
   font-weight: bold;
   font-size: 1.2rem;
-  margin: 0 1rem 2rem;
+  margin: 1rem;
 `;
 
 export const SidebarKanbanListWraaper = styled.div`

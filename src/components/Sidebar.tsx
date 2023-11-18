@@ -3,7 +3,7 @@ import { SidebarContainer, SidebarHeader, SidebarKanbanList, SidebarKanbanListIc
 const Sidebar = () => {
   return (
     <SidebarContainer>
-      <SidebarHeader>All Kanban List{/* Kanban list number */}</SidebarHeader>
+      <SidebarHeader>Kanban 목록{/* Kanban list number */}</SidebarHeader>
       <SidebarKanbanListWraaper>
         {/* kanban list는 kanban상위 상태에서 mapping해서 활용 */}
         <SidebarKanbanList>
