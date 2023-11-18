@@ -54,13 +54,25 @@ const KanbanBoard = () => {
     };
     setTasks([...tasks, AddTask]);
   };
+  const deleteTaskCard = (id: Id) => {
+    const filterTasks = tasks.filter((task) => task.id !== id);
+    setTasks(filterTasks);
+  };
 
   return (
     <KanbanBoardContainer>
       <KanbanBoardWrapper>
         <KanbanBoardBox>
           {columns.map((col) => (
-            <ColumnContainer key={col.id} column={col} tasks={tasks.filter((task) => task.columnId === col.id)} deleteColumn={deleteColumn} updateColumn={updateColumn} createNewTask={createNewTask} />
+            <ColumnContainer
+              key={col.id}
+              column={col}
+              tasks={tasks.filter((task) => task.columnId === col.id)}
+              deleteColumn={deleteColumn}
+              updateColumn={updateColumn}
+              createNewTask={createNewTask}
+              deleteTaskCard={deleteTaskCard}
+            />
           ))}
         </KanbanBoardBox>
         <KanbanBoardAddColumnBtn onClick={createNewColumn}>

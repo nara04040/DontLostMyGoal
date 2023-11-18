@@ -11,9 +11,10 @@ interface Props {
   deleteColumn: (id: Id) => void;
   updateColumn: (id: Id, title: string) => void;
   createNewTask: (columnId: Id) => void;
+  deleteTaskCard: (id: Id) => void;
 }
 
-const ColumnContainer = ({ column, tasks, deleteColumn, updateColumn, createNewTask }: Props) => {
+const ColumnContainer = ({ column, tasks, deleteColumn, updateColumn, createNewTask, deleteTaskCard }: Props) => {
   const [editMode, setEditMode] = useState<boolean>(false);
 
   return (
@@ -41,7 +42,7 @@ const ColumnContainer = ({ column, tasks, deleteColumn, updateColumn, createNewT
       </ColumnTitle>
       <ColumnContent>
         {tasks.map((task) => (
-          <TaskCard key={task.id} task={task} />
+          <TaskCard key={task.id} task={task} deleteTaskCard={deleteTaskCard} />
         ))}
       </ColumnContent>
       <AddTaskBtn onClick={() => createNewTask(column.id)}>
