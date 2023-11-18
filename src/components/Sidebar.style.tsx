@@ -3,12 +3,13 @@ import styled from "styled-components";
 export const SidebarContainer = styled.div`
   /* background-color: ${({ theme }) => theme.background}; */
   background-color: #f4f5f7;
-  position: fixed;
+  position: absolute;
   left: 8px;
   width: 260px;
   height: 100vh;
   align-content: center;
   z-index: 50;
+  border-right: 1px dotted #d1d5db;
 `;
 
 export const SidebarHeader = styled.div`

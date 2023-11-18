@@ -18,7 +18,8 @@ export const TaskContainer = styled.div`
 
 export const TrashIconBoxBtn = styled.button`
   padding: 0.5rem 0.2rem;
-  stroke: #6b7280;
+  /* stroke: #6b7280; */
+  stroke: #ee6e6e;
   border-radius: 0.2rem;
   border: none;
   cursor: pointer;

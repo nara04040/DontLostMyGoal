@@ -37,6 +37,7 @@ export const AddTaskBtn = styled.button`
   align-items: center;
   gap: 0.5rem;
   border: none;
+  border-radius: 0.5rem;
   padding: 1rem;
   background-color: inherit;
   font-weight: bold;
