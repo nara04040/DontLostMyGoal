@@ -58,6 +58,15 @@ const KanbanBoard = () => {
     const filterTasks = tasks.filter((task) => task.id !== id);
     setTasks(filterTasks);
   };
+  const updateTaskCard = (id: Id, title: string) => {
+    const newTasksTitle = tasks.map((task) => {
+      if (task.id === id) {
+        return { ...task, title };
+      }
+      return task;
+    });
+    setTasks(newTasksTitle);
+  };
 
   return (
     <KanbanBoardContainer>
@@ -72,6 +81,7 @@ const KanbanBoard = () => {
               updateColumn={updateColumn}
               createNewTask={createNewTask}
               deleteTaskCard={deleteTaskCard}
+              updateTaskCard={updateTaskCard}
             />
           ))}
         </KanbanBoardBox>
