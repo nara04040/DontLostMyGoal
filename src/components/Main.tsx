@@ -2,10 +2,14 @@ import Sidebar from "./Sidebar";
 import KanbanBoard from "./KanbanBoard";
 import styled from "styled-components";
 
-const Main = () => {
+interface Props {
+  kanbanTitle: string;
+}
+
+const Main = ({ kanbanTitle }: Props) => {
   return (
     <MainContainer>
-      <Sidebar />
+      <Sidebar kanbanTitle={kanbanTitle} />
       <KanbanBoard />
     </MainContainer>
   );

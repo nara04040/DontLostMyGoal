@@ -1,13 +1,17 @@
 import { BoardName, HeaderContainer, HeaderTitle, KanbanBoardNameContainer, LeftSide, LogoImage } from "./Header.style";
 
-export const Header = () => {
+interface Props {
+  kanbanTitle: string;
+}
+
+export const Header = ({ kanbanTitle }: Props) => {
   return (
     <HeaderContainer>
       <LeftSide>
         <LogoImage src="/logo.jpeg" />
         <HeaderTitle>Don't Lost Goal</HeaderTitle>
         <KanbanBoardNameContainer>
-          <BoardName>`board.name이 들어옵니다.`</BoardName>
+          <BoardName>{kanbanTitle}</BoardName>
         </KanbanBoardNameContainer>
       </LeftSide>
     </HeaderContainer>
