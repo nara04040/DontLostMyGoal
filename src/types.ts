@@ -11,3 +11,8 @@ export type Task = {
   title: string;
   description: string;
 };
+
+export type Kanban = {
+  id: Id;
+  title: string;
+};

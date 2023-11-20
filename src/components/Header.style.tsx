@@ -51,3 +51,25 @@ export const BoardName = styled.h2`
     margin-left: 5rem;
   }
 `;
+
+export const AddNewKanbanBtn = styled.button`
+  display: flex;
+  height: 60px;
+  width: 150px;
+  align-items: center;
+  cursor: pointer;
+  padding: 1rem;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  /* background-color: var(--mainBackgroundColor); */
+  background-color: #cfd1d4;
+  border: 2px solid var(--columnBackgroundColor);
+  box-shadow: 0 0 0 0px #b93a46;
+  font-weight: bold;
+  margin-right: 3rem;
+`;
+
+export const IconBox = styled.div`
+  width: 1.5rem;
+  height: 1.5rem;
+`;

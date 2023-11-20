@@ -23,7 +23,7 @@ export const SidebarHeader = styled.div`
 export const SidebarKanbanListWraaper = styled.div`
   display: flex;
   flex-direction: column;
-  height: 70vh;
+  height: 20vh;
   justify-content: space-between;
 `;
 
