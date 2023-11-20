@@ -1,6 +1,6 @@
 import { useState } from "react";
 import TrashIcon from "../icons/TrashIcon";
-import { Id, Task } from "./KanbanBoard";
+import { Id, Task } from "../types";
 import { TaskContainer, TrashIconBox, TrashIconBoxBtn } from "./TaskCard.style";
 
 interface Props {

@@ -2,10 +2,11 @@ import styled from "styled-components";
 import "./App.css";
 import { Header } from "./components/Header";
 import Main from "./components/Main";
-import { useState } from "react";
+
+import useStore from "./stores/kanbanStore";
 
 function App() {
-  const [kanbanTitle, setKanbanTitle] = useState<string>("first kanban");
+  const { kanbanTitle } = useStore();
 
   return (
     <>
