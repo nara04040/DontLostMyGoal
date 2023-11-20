@@ -1,10 +1,10 @@
-import { SidebarContainer, SidebarHeader, SidebarKanbanList, SidebarKanbanListIconItem, SidebarKanbanListIconText, SidebarKanbanListWraaper } from "./Sidebar.style";
+import PencilIcon from "../icons/PencilIcon";
+import useStore from "../stores/kanbanStore";
+import { PencilIconBox, PencilIconBtn, SidebarContainer, SidebarHeader, SidebarKanbanList, SidebarKanbanListIconItem, SidebarKanbanListIconText, SidebarKanbanListWraaper } from "./Sidebar.style";
 
-interface Props {
-  kanbanTitle: string;
-}
+const Sidebar = () => {
+  const { kanbanTitle } = useStore();
 
-const Sidebar = ({ kanbanTitle }: Props) => {
   return (
     <SidebarContainer>
       <SidebarHeader>Kanban 목록{/* Kanban list number */}</SidebarHeader>
@@ -13,6 +13,11 @@ const Sidebar = ({ kanbanTitle }: Props) => {
         <SidebarKanbanList>
           {/*Kanban list 1 */}1<SidebarKanbanListIconItem>😁</SidebarKanbanListIconItem>
           <SidebarKanbanListIconText>{kanbanTitle}</SidebarKanbanListIconText>
+          <PencilIconBtn>
+            <PencilIconBox>
+              <PencilIcon />
+            </PencilIconBox>
+          </PencilIconBtn>
         </SidebarKanbanList>
       </SidebarKanbanListWraaper>
     </SidebarContainer>

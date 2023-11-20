@@ -21,6 +21,7 @@ const useStore = create<KanbanState>((set) => ({
   addColumn: (column: Column) => set((state) => ({ columns: [...state.columns, column] })),
   deleteColumn: (id: Id) => set((state) => ({ columns: state.columns.filter((col) => col.id !== id) })),
   updateColumn: (id: Id, title: string) => set((state) => ({ columns: state.columns.map((col) => (col.id === id ? { ...col, title } : col)) })),
+
   addTask: (task: Task) => set((state) => ({ tasks: [...state.tasks, task] })),
   deleteTaskCard: (id: Id) => set((state) => ({ tasks: state.tasks.filter((task) => task.id !== id) })),
   updateTaskCard: (id: Id, title: string) => set((state) => ({ tasks: state.tasks.map((task) => (task.id === id ? { ...task, title } : task)) })),

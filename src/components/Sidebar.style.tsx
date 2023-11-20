@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const SidebarContainer = styled.div`
   /* background-color: ${({ theme }) => theme.background}; */
@@ -26,16 +26,33 @@ export const SidebarKanbanListWraaper = styled.div`
   height: 70vh;
   justify-content: space-between;
 `;
+
+export const PencilIconBtn = styled.button`
+  padding: 0.5rem 0.2rem;
+  stroke: #6b7280;
+  border-radius: 0.2rem;
+  border: none;
+  cursor: pointer;
+  background-color: inherit;
+  visibility: hidden;
+`;
+
 export const SidebarKanbanList = styled.div`
-  background-color: white;
   display: flex;
-  margin-right: 2rem;
+  justify-content: center;
+  margin-right: 1rem;
   align-items: baseline;
   gap: 0.5rem;
-
   border-radius: 10px;
   padding: 1rem 1.2rem;
   cursor: pointer;
+  background-color: white;
+
+  &:hover {
+    ${PencilIconBtn} {
+      visibility: visible;
+    }
+  }
 `;
 
 export const SidebarKanbanListIconItem = styled.p`
@@ -46,4 +63,10 @@ export const SidebarKanbanListIconText = styled.p`
   font-weight: bold;
   font-size: 1rem;
   line-height: 1rem;
+`;
+
+export const PencilIconBox = styled.div`
+  width: 1.5rem;
+  height: 1.5rem;
+  vertical-align: middle;
 `;
