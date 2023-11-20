@@ -2,6 +2,7 @@ import { useState } from "react";
 import { IconBox, KanbanBoardAddColumnBtn, KanbanBoardBox, KanbanBoardContainer, KanbanBoardWrapper } from "./KanbanBoard.style";
 import ColumnContainer from "./ColumnContainer";
 import PlusIcon from "../icons/PlusIcon";
+import { create } from "zustand";
 
 export type Id = string | number;
 
@@ -17,6 +18,10 @@ export type Task = {
   description: string;
 };
 
+const useStore = create((set) => ({
+  coulmns: [],
+}));
+
 const KanbanBoard = () => {
   const [columns, setColumns] = useState<Column[]>([]);
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -28,6 +33,7 @@ const KanbanBoard = () => {
     };
     setColumns([...columns, AddColumn]);
   };
+
   const deleteColumn = (id: Id) => {
     const filterColumns = columns.filter((col) => col.id !== id);
     setColumns(filterColumns);
