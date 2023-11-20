@@ -18,35 +18,39 @@ export type Task = {
   description: string;
 };
 
-const useStore = create((set) => ({
-  coulmns: [],
+interface KanbanState {
+  columns: Column[];
+  tasks: Task[];
+  addColumn: (column: Column) => void;
+  deleteColumn: (id: Id) => void;
+  updateColumn: (id: Id, title: string) => void;
+  addTask: (task: Task) => void;
+  deleteTaskCard: (id: Id) => void;
+  updateTaskCard: (id: Id, title: string) => void;
+}
+
+const useStore = create<KanbanState>((set) => ({
+  columns: [],
+  tasks: [],
+  addColumn: (column: Column) => set((state) => ({ columns: [...state.columns, column] })),
+  deleteColumn: (id: Id) => set((state) => ({ columns: state.columns.filter((col) => col.id !== id) })),
+  updateColumn: (id: Id, title: string) => set((state) => ({ columns: state.columns.map((col) => (col.id === id ? { ...col, title } : col)) })),
+  addTask: (task: Task) => set((state) => ({ tasks: [...state.tasks, task] })),
+  deleteTaskCard: (id: Id) => set((state) => ({ tasks: state.tasks.filter((task) => task.id !== id) })),
+  updateTaskCard: (id: Id, title: string) => set((state) => ({ tasks: state.tasks.map((task) => (task.id === id ? { ...task, title } : task)) })),
 }));
 
 const KanbanBoard = () => {
-  const [columns, setColumns] = useState<Column[]>([]);
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const { columns, tasks, addColumn, deleteColumn, updateColumn, addTask, deleteTaskCard, updateTaskCard } = useStore();
 
   const createNewColumn = () => {
-    const AddColumn: Column = {
+    const newColumn: Column = {
       id: generatedId(),
       title: `Column ${columns.length + 1}`,
     };
-    setColumns([...columns, AddColumn]);
+    addColumn(newColumn);
   };
 
-  const deleteColumn = (id: Id) => {
-    const filterColumns = columns.filter((col) => col.id !== id);
-    setColumns(filterColumns);
-  };
-  const updateColumn = (id: Id, title: string) => {
-    const newColumnsTitle = columns.map((col) => {
-      if (col.id === id) {
-        return { ...col, title };
-      }
-      return col;
-    });
-    setColumns(newColumnsTitle);
-  };
   const generatedId = (): Id => {
     return Math.floor(Math.random() * 10001);
   };
@@ -58,20 +62,7 @@ const KanbanBoard = () => {
       title: `Task ${tasks.length + 1}`,
       description: `Task ${tasks.length + 1} description`,
     };
-    setTasks([...tasks, AddTask]);
-  };
-  const deleteTaskCard = (id: Id) => {
-    const filterTasks = tasks.filter((task) => task.id !== id);
-    setTasks(filterTasks);
-  };
-  const updateTaskCard = (id: Id, title: string) => {
-    const newTasksTitle = tasks.map((task) => {
-      if (task.id === id) {
-        return { ...task, title };
-      }
-      return task;
-    });
-    setTasks(newTasksTitle);
+    addTask(AddTask);
   };
 
   return (
