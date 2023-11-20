@@ -1,4 +1,4 @@
-import { Column, Id, Task } from "./KanbanBoard";
+import { Column, Id, Task } from "../types";
 import TrashIcon from "../icons/TrashIcon";
 import PlusIcon from "../icons/PlusIcon";
 import { AddTaskBtn, ColumnCard, ColumnContent, ColumnTitle, IconBox, TrashIconBox, TrashIconBoxBtn } from "./ColumnContainer.style";

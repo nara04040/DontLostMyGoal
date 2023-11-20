@@ -1,44 +1,8 @@
-import { useState } from "react";
 import { IconBox, KanbanBoardAddColumnBtn, KanbanBoardBox, KanbanBoardContainer, KanbanBoardWrapper } from "./KanbanBoard.style";
 import ColumnContainer from "./ColumnContainer";
 import PlusIcon from "../icons/PlusIcon";
-import { create } from "zustand";
-
-export type Id = string | number;
-
-export type Column = {
-  id: Id;
-  title: string;
-};
-
-export type Task = {
-  id: Id;
-  columnId: Id;
-  title: string;
-  description: string;
-};
-
-interface KanbanState {
-  columns: Column[];
-  tasks: Task[];
-  addColumn: (column: Column) => void;
-  deleteColumn: (id: Id) => void;
-  updateColumn: (id: Id, title: string) => void;
-  addTask: (task: Task) => void;
-  deleteTaskCard: (id: Id) => void;
-  updateTaskCard: (id: Id, title: string) => void;
-}
-
-const useStore = create<KanbanState>((set) => ({
-  columns: [],
-  tasks: [],
-  addColumn: (column: Column) => set((state) => ({ columns: [...state.columns, column] })),
-  deleteColumn: (id: Id) => set((state) => ({ columns: state.columns.filter((col) => col.id !== id) })),
-  updateColumn: (id: Id, title: string) => set((state) => ({ columns: state.columns.map((col) => (col.id === id ? { ...col, title } : col)) })),
-  addTask: (task: Task) => set((state) => ({ tasks: [...state.tasks, task] })),
-  deleteTaskCard: (id: Id) => set((state) => ({ tasks: state.tasks.filter((task) => task.id !== id) })),
-  updateTaskCard: (id: Id, title: string) => set((state) => ({ tasks: state.tasks.map((task) => (task.id === id ? { ...task, title } : task)) })),
-}));
+import useStore from "../stores/kanbanStore";
+import { Column, Id, Task } from "../types";
 
 const KanbanBoard = () => {
   const { columns, tasks, addColumn, deleteColumn, updateColumn, addTask, deleteTaskCard, updateTaskCard } = useStore();
