@@ -3,14 +3,14 @@ import useStore from "../stores/kanbanStore";
 import { PencilIconBox, PencilIconBtn, SidebarContainer, SidebarHeader, SidebarKanbanList, SidebarKanbanListIconItem, SidebarKanbanListIconText, SidebarKanbanListWraaper } from "./Sidebar.style";
 
 const Sidebar = () => {
-  const { kanban } = useStore();
+  const { kanban, updatecurrentKanban } = useStore();
 
   return (
     <SidebarContainer>
       <SidebarHeader>Kanban 목록</SidebarHeader>
       <SidebarKanbanListWraaper>
         {kanban.map((kanban) => (
-          <SidebarKanbanList key={kanban.id}>
+          <SidebarKanbanList key={kanban.id} onClick={() => updatecurrentKanban(kanban.id)}>
             <SidebarKanbanListIconItem>😁</SidebarKanbanListIconItem>
             <SidebarKanbanListIconText>{kanban.title}</SidebarKanbanListIconText>
             <PencilIconBtn>
