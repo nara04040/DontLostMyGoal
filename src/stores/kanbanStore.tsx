@@ -5,8 +5,11 @@ interface KanbanState {
   columns: Column[];
   tasks: Task[];
   kanban: Kanban[];
+  editMode: boolean;
   currentKanban: Id;
+
   generatedId: () => Id;
+  setEditMode: (editMode: boolean) => void;
   addColumn: (column: Column) => void;
   deleteColumn: (id: Id) => void;
   updateColumn: (id: Id, title: string) => void;
@@ -27,11 +30,14 @@ const useStore = create<KanbanState>((set) => ({
     { id: 1, title: "test" },
     { id: 2, title: "test2" },
   ],
+  editMode: false,
   currentKanban: 0,
 
   generatedId: (): Id => {
     return Math.floor(Math.random() * 10001);
   },
+  setEditMode: (editMode: boolean) => set(() => ({ editMode })),
+
   addColumn: (column: Column) => set((state) => ({ columns: [...state.columns, column] })),
   deleteColumn: (id: Id) => set((state) => ({ columns: state.columns.filter((col) => col.id !== id) })),
   updateColumn: (id: Id, title: string) => set((state) => ({ columns: state.columns.map((col) => (col.id === id ? { ...col, title } : col)) })),
