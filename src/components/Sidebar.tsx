@@ -1,6 +1,18 @@
 import PencilIcon from "../icons/PencilIcon";
+import TrashIcon from "../icons/TrashIcon";
 import useStore from "../stores/kanbanStore";
-import { PencilIconBox, PencilIconBtn, SidebarContainer, SidebarHeader, SidebarKanbanList, SidebarKanbanListIconItem, SidebarKanbanListIconText, SidebarKanbanListWraaper } from "./Sidebar.style";
+import {
+  IconWrapper,
+  PencilIconBox,
+  PencilIconBtn,
+  SidebarContainer,
+  SidebarHeader,
+  SidebarKanbanList,
+  SidebarKanbanListIconText,
+  SidebarKanbanListWraaper,
+  TrashIconBox,
+  TrashIconBtn,
+} from "./Sidebar.style";
 
 const Sidebar = () => {
   const { kanban, updatecurrentKanban } = useStore();
@@ -11,13 +23,19 @@ const Sidebar = () => {
       <SidebarKanbanListWraaper>
         {kanban.map((kanban) => (
           <SidebarKanbanList key={kanban.id} onClick={() => updatecurrentKanban(kanban.id)}>
-            <SidebarKanbanListIconItem>😁</SidebarKanbanListIconItem>
             <SidebarKanbanListIconText>{kanban.title}</SidebarKanbanListIconText>
-            <PencilIconBtn>
-              <PencilIconBox>
-                <PencilIcon />
-              </PencilIconBox>
-            </PencilIconBtn>
+            <IconWrapper>
+              <PencilIconBtn>
+                <PencilIconBox>
+                  <PencilIcon />
+                </PencilIconBox>
+              </PencilIconBtn>
+              <TrashIconBtn>
+                <TrashIconBox>
+                  <TrashIcon />
+                </TrashIconBox>
+              </TrashIconBtn>
+            </IconWrapper>
           </SidebarKanbanList>
         ))}
       </SidebarKanbanListWraaper>

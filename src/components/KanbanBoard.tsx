@@ -5,7 +5,7 @@ import useStore from "../stores/kanbanStore";
 import { Column, Id, Task } from "../types";
 
 const KanbanBoard = () => {
-  const { columns, tasks, addColumn, deleteColumn, updateColumn, addTask, deleteTaskCard, updateTaskCard } = useStore();
+  const { columns, tasks, generatedId, addColumn, deleteColumn, updateColumn, addTask, deleteTaskCard, updateTaskCard } = useStore();
 
   const createNewColumn = () => {
     const newColumn: Column = {
@@ -13,10 +13,6 @@ const KanbanBoard = () => {
       title: `Column ${columns.length + 1}`,
     };
     addColumn(newColumn);
-  };
-
-  const generatedId = (): Id => {
-    return Math.floor(Math.random() * 10001);
   };
 
   const createNewTask = (columnId: Id) => {

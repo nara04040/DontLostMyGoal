@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 export const SidebarContainer = styled.div`
   /* background-color: ${({ theme }) => theme.background}; */
@@ -23,7 +23,6 @@ export const SidebarHeader = styled.div`
 export const SidebarKanbanListWraaper = styled.div`
   display: flex;
   flex-direction: column;
-  height: 20vh;
   justify-content: space-between;
 `;
 
@@ -37,12 +36,24 @@ export const PencilIconBtn = styled.button`
   visibility: hidden;
 `;
 
+export const TrashIconBtn = styled.button`
+  padding: 0.5rem 0.2rem;
+  stroke: #6b7280;
+  border-radius: 0.2rem;
+  border: none;
+  cursor: pointer;
+  background-color: inherit;
+  visibility: hidden;
+`;
+
 export const SidebarKanbanList = styled.div`
   display: flex;
-  justify-content: center;
+  flex-wrap: nowrap;
+  justify-content: space-between;
   margin-right: 1rem;
-  align-items: baseline;
-  gap: 0.5rem;
+  margin-bottom: 20px;
+  align-items: center;
+  gap: 1.5rem;
   border-radius: 10px;
   padding: 1rem 1.2rem;
   cursor: pointer;
@@ -52,13 +63,12 @@ export const SidebarKanbanList = styled.div`
     ${PencilIconBtn} {
       visibility: visible;
     }
+    ${TrashIconBtn} {
+      visibility: visible;
+    }
   }
 `;
 
-export const SidebarKanbanListIconItem = styled.p`
-  vertical-align: middle;
-  height: 1rem;
-`;
 export const SidebarKanbanListIconText = styled.p`
   font-weight: bold;
   font-size: 1rem;
@@ -69,4 +79,14 @@ export const PencilIconBox = styled.div`
   width: 1.5rem;
   height: 1.5rem;
   vertical-align: middle;
+`;
+
+export const TrashIconBox = styled.div`
+  width: 1.5rem;
+  height: 1.5rem;
+  vertical-align: middle;
+`;
+
+export const IconWrapper = styled.div`
+  display: flex;
 `;
