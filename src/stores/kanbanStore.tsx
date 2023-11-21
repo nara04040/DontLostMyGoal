@@ -16,6 +16,8 @@ interface KanbanState {
   updatecurrentKanban: (id: Id) => void;
 
   addKanban: (kanban: Kanban) => void;
+  deleteKanban: (id: Id) => void;
+  updateKanban: (id: Id, title: string) => void;
 }
 
 const useStore = create<KanbanState>((set) => ({
@@ -40,6 +42,8 @@ const useStore = create<KanbanState>((set) => ({
 
   updatecurrentKanban: (id: Id) => set(() => ({ currentKanban: id })),
   addKanban: (kanban: Kanban) => set((state) => ({ kanban: [...state.kanban, kanban] })),
+  deleteKanban: (id: Id) => set((state) => ({ kanban: state.kanban.filter((kanban) => kanban.id !== id) })),
+  updateKanban: (id: Id, title: string) => set((state) => ({ kanban: state.kanban.map((kanban) => (kanban.id === id ? { ...kanban, title } : kanban)) })),
 }));
 
 export default useStore;

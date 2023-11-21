@@ -15,7 +15,7 @@ import {
 } from "./Sidebar.style";
 
 const Sidebar = () => {
-  const { kanban, updatecurrentKanban } = useStore();
+  const { kanban, updatecurrentKanban, deleteKanban } = useStore();
 
   return (
     <SidebarContainer>
@@ -25,12 +25,12 @@ const Sidebar = () => {
           <SidebarKanbanList key={kanban.id} onClick={() => updatecurrentKanban(kanban.id)}>
             <SidebarKanbanListIconText>{kanban.title}</SidebarKanbanListIconText>
             <IconWrapper>
-              <PencilIconBtn>
+              <PencilIconBtn onClick={() => console.log("Kanban수정!")}>
                 <PencilIconBox>
                   <PencilIcon />
                 </PencilIconBox>
               </PencilIconBtn>
-              <TrashIconBtn>
+              <TrashIconBtn onClick={() => deleteKanban(kanban.id)}>
                 <TrashIconBox>
                   <TrashIcon />
                 </TrashIconBox>
