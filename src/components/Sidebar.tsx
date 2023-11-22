@@ -22,15 +22,15 @@ const Sidebar = () => {
       <SidebarHeader>Kanban 목록</SidebarHeader>
       <SidebarKanbanListWraaper>
         {kanban.map((kanban) => (
-          <SidebarKanbanList key={kanban.id} onClick={() => updatecurrentKanban(kanban.id)}>
-            <SidebarKanbanListIconText>{kanban.title}</SidebarKanbanListIconText>
+          <SidebarKanbanList key={kanban.kanbanId} onClick={() => updatecurrentKanban(kanban.kanbanId)}>
+            <SidebarKanbanListIconText>{kanban.kanbanTitle}</SidebarKanbanListIconText>
             <IconWrapper>
               <PencilIconBtn onClick={() => setEditMode(true)}>
                 <PencilIconBox>
                   <PencilIcon />
                 </PencilIconBox>
               </PencilIconBtn>
-              <TrashIconBtn onClick={() => deleteKanban(kanban.id)}>
+              <TrashIconBtn onClick={() => deleteKanban(kanban.kanbanId)}>
                 <TrashIconBox>
                   <TrashIcon />
                 </TrashIconBox>

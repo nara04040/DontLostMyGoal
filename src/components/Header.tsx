@@ -4,7 +4,7 @@ import { AddNewKanbanBtn, BoardName, HeaderContainer, HeaderTitle, IconBox, Kanb
 
 export const Header = () => {
   const { kanban, currentKanban, addKanban, generatedId } = useStore();
-  const currentKanbanTitle = kanban.find((kanban) => kanban.id === currentKanban)?.title;
+  const currentKanbanTitle = kanban.find((kanban) => kanban.kanbanId === currentKanban)?.kanbanTitle;
   return (
     <HeaderContainer>
       <LeftSide>
@@ -14,7 +14,7 @@ export const Header = () => {
           <BoardName>{currentKanbanTitle}</BoardName>
         </KanbanBoardNameContainer>
       </LeftSide>
-      <AddNewKanbanBtn onClick={() => addKanban({ id: generatedId(), title: "new kanban" })}>
+      <AddNewKanbanBtn onClick={() => addKanban({ kanbanId: generatedId(), kanbanTitle: "new kanban", columns: [{ id: 1, title: "new col" }] })}>
         <IconBox>
           <PlusIcon />
         </IconBox>

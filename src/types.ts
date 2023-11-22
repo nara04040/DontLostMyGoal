@@ -13,6 +13,7 @@ export type Task = {
 };
 
 export type Kanban = {
-  id: Id;
-  title: string;
+  kanbanId: Id;
+  kanbanTitle: string;
+  columns: Column[];
 };
