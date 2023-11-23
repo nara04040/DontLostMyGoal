@@ -3,7 +3,7 @@ import useStore from "../stores/kanbanStore";
 import { AddNewKanbanBtn, BoardName, HeaderContainer, HeaderTitle, IconBox, KanbanBoardNameContainer, LeftSide, LogoImage } from "./Header.style";
 
 export const Header = () => {
-  const { kanban, currentKanban, addKanban, generatedId } = useStore();
+  const { kanban, currentKanban } = useStore();
   const currentKanbanTitle = kanban.find((kanban) => kanban.kanbanId === currentKanban)?.kanbanTitle;
   return (
     <HeaderContainer>
