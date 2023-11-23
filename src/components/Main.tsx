@@ -1,8 +1,11 @@
 import Sidebar from "./Sidebar";
 import KanbanBoard from "./KanbanBoard";
 import styled from "styled-components";
+import useStore from "../stores/kanbanStore";
 
 const Main = () => {
+  const { kanban } = useStore();
+  console.log(kanban);
   return (
     <MainContainer>
       <Sidebar />

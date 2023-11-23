@@ -16,4 +16,5 @@ export type Kanban = {
   kanbanId: Id;
   kanbanTitle: string;
   columns: Column[];
+  tasks: Task[];
 };

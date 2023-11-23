@@ -14,7 +14,7 @@ export const Header = () => {
           <BoardName>{currentKanbanTitle}</BoardName>
         </KanbanBoardNameContainer>
       </LeftSide>
-      <AddNewKanbanBtn onClick={() => addKanban({ kanbanId: generatedId(), kanbanTitle: "new kanban", columns: [{ id: 1, title: "new col" }] })}>
+      <AddNewKanbanBtn onClick={() => console.log("hi")}>
         <IconBox>
           <PlusIcon />
         </IconBox>
