@@ -35,7 +35,6 @@ const useStore = create<KanbanState>((set) => ({
   },
   setEditMode: (editMode: boolean) => set(() => ({ editMode })),
 
-  // addColumn: (column: Column) => set((state) => ({ columns: [...state.columns, column] })),
   addColumn: (column: Column) => set((state) => ({ kanban: state.kanban.map((kanban) => (kanban.kanbanId === state.currentKanban ? { ...kanban, columns: [...kanban.columns, column] } : kanban)) })),
   deleteColumn: (id: Id) => set((state) => ({ columns: state.columns.filter((col) => col.id !== id) })),
   updateColumn: (id: Id, title: string) => set((state) => ({ columns: state.columns.map((col) => (col.id === id ? { ...col, title } : col)) })),

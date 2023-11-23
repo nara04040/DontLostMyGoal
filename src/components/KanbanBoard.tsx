@@ -5,7 +5,7 @@ import useStore from "../stores/kanbanStore";
 import { Column, Id, Task } from "../types";
 
 const KanbanBoard = () => {
-  const { columns, tasks, generatedId, addColumn, deleteColumn, updateColumn, addTask, deleteTaskCard, updateTaskCard } = useStore();
+  const { columns, tasks, kanban, generatedId, addColumn, deleteColumn, updateColumn, addTask, deleteTaskCard, updateTaskCard } = useStore();
 
   const createNewColumn = () => {
     const newColumn: Column = {
@@ -14,6 +14,10 @@ const KanbanBoard = () => {
     };
     addColumn(newColumn);
   };
+  console.log(
+    "kanban",
+    kanban.map((kanban) => kanban.columns)
+  );
 
   const createNewTask = (columnId: Id) => {
     const AddTask: Task = {
@@ -29,18 +33,20 @@ const KanbanBoard = () => {
     <KanbanBoardContainer>
       <KanbanBoardWrapper>
         <KanbanBoardBox>
-          {columns.map((col) => (
-            <ColumnContainer
-              key={col.id}
-              column={col}
-              tasks={tasks.filter((task) => task.columnId === col.id)}
-              deleteColumn={deleteColumn}
-              updateColumn={updateColumn}
-              createNewTask={createNewTask}
-              deleteTaskCard={deleteTaskCard}
-              updateTaskCard={updateTaskCard}
-            />
-          ))}
+          {kanban.map((kanbans) =>
+            kanbans.columns.map((col) => (
+              <ColumnContainer
+                key={col.id}
+                column={col}
+                tasks={tasks.filter((task) => task.columnId === col.id)}
+                deleteColumn={deleteColumn}
+                updateColumn={updateColumn}
+                createNewTask={createNewTask}
+                deleteTaskCard={deleteTaskCard}
+                updateTaskCard={updateTaskCard}
+              />
+            ))
+          )}
         </KanbanBoardBox>
         <KanbanBoardAddColumnBtn onClick={createNewColumn}>
           <IconBox>
