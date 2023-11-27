@@ -5,21 +5,16 @@ import useStore from "../stores/kanbanStore";
 import { Column, Id, Task } from "../types";
 
 const KanbanBoard = () => {
-  const { kanban, generatedId, addColumn, deleteColumn, updateColumn, addTask, deleteTaskCard, updateTaskCard } = useStore();
+  const { kanban, currentKanban, generatedId, addColumn, deleteColumn, updateColumn, addTask, deleteTaskCard, updateTaskCard } = useStore();
 
   const createNewColumn = () => {
     const newColumn: Column = {
       id: generatedId(),
-      title: `Column ${kanban.map((kanban) => kanban.columns.length + 1)}`,
+      title: `Column ${kanban.map((kanban) => kanban.columns.length)} `,
       task: [],
     };
     addColumn(newColumn);
   };
-
-  console.log(
-    "kanban",
-    kanban.map((kanban) => kanban.columns)
-  );
 
   const createNewTask = (columnId: Id) => {
     const AddTask: Task = {
@@ -31,16 +26,17 @@ const KanbanBoard = () => {
     addTask(AddTask);
   };
 
+  const currentKanbanData = kanban.find((kanban) => kanban.kanbanId === currentKanban);
+
   return (
     <KanbanBoardContainer>
       <KanbanBoardWrapper>
         <KanbanBoardBox>
-          {kanban.map((kanbans) =>
+          {/* {kanban.map((kanbans) =>
             kanbans.columns.map((col) => (
               <ColumnContainer
                 key={col.id}
                 column={col}
-                // tasks={tasks.filter((task) => task.columnId === col.id)}
                 tasks={col.task.filter((task) => task.columnId === col.id)}
                 deleteColumn={deleteColumn}
                 updateColumn={updateColumn}
@@ -49,7 +45,20 @@ const KanbanBoard = () => {
                 updateTaskCard={updateTaskCard}
               />
             ))
-          )}
+          )} */}
+          {currentKanbanData &&
+            currentKanbanData.columns.map((col) => (
+              <ColumnContainer
+                key={col.id}
+                column={col}
+                tasks={col.task.filter((task) => task.columnId === col.id)}
+                deleteColumn={deleteColumn}
+                updateColumn={updateColumn}
+                createNewTask={createNewTask}
+                deleteTaskCard={deleteTaskCard}
+                updateTaskCard={updateTaskCard}
+              />
+            ))}
         </KanbanBoardBox>
         <KanbanBoardAddColumnBtn onClick={createNewColumn}>
           <IconBox>

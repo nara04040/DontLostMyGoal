@@ -1,6 +1,7 @@
 import PencilIcon from "../icons/PencilIcon";
 import TrashIcon from "../icons/TrashIcon";
 import useStore from "../stores/kanbanStore";
+import { Id } from "../types";
 import {
   IconWrapper,
   PencilIconBox,
@@ -15,20 +16,16 @@ import {
 } from "./Sidebar.style";
 
 const Sidebar = () => {
-  const { kanban, currentKanban, updatecurrentKanban, deleteKanban, setEditMode } = useStore();
-
+  const { kanban, deleteKanban, setEditMode, updatecurrentKanban } = useStore();
+  const handleKanbanSelect = (kanbanId: Id) => {
+    updatecurrentKanban(kanbanId);
+  };
   return (
     <SidebarContainer>
       <SidebarHeader>Kanban 목록</SidebarHeader>
       <SidebarKanbanListWraaper>
         {kanban.map((kanban) => (
-          <SidebarKanbanList
-            key={kanban.kanbanId}
-            onClick={() => {
-              updatecurrentKanban(kanban.kanbanId);
-              console.log(currentKanban);
-            }}
-          >
+          <SidebarKanbanList key={kanban.kanbanId} onClick={() => handleKanbanSelect(kanban.kanbanId)}>
             <SidebarKanbanListIconText>{kanban.kanbanTitle}</SidebarKanbanListIconText>
             <IconWrapper>
               <PencilIconBtn onClick={() => setEditMode(true)}>
