@@ -3,6 +3,7 @@ export type Id = string | number;
 export type Column = {
   id: Id;
   title: string;
+  task: Task[];
 };
 
 export type Task = {
@@ -16,5 +17,4 @@ export type Kanban = {
   kanbanId: Id;
   kanbanTitle: string;
   columns: Column[];
-  tasks: Task[];
 };

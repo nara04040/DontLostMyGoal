@@ -15,14 +15,20 @@ import {
 } from "./Sidebar.style";
 
 const Sidebar = () => {
-  const { kanban, updatecurrentKanban, deleteKanban, setEditMode } = useStore();
+  const { kanban, currentKanban, updatecurrentKanban, deleteKanban, setEditMode } = useStore();
 
   return (
     <SidebarContainer>
       <SidebarHeader>Kanban 목록</SidebarHeader>
       <SidebarKanbanListWraaper>
         {kanban.map((kanban) => (
-          <SidebarKanbanList key={kanban.kanbanId} onClick={() => updatecurrentKanban(kanban.kanbanId)}>
+          <SidebarKanbanList
+            key={kanban.kanbanId}
+            onClick={() => {
+              updatecurrentKanban(kanban.kanbanId);
+              console.log(currentKanban);
+            }}
+          >
             <SidebarKanbanListIconText>{kanban.kanbanTitle}</SidebarKanbanListIconText>
             <IconWrapper>
               <PencilIconBtn onClick={() => setEditMode(true)}>

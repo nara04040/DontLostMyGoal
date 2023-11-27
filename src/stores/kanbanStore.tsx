@@ -2,8 +2,8 @@ import { create } from "zustand";
 import { Column, Id, Kanban, Task } from "../types";
 
 interface KanbanState {
-  columns: Column[];
-  tasks: Task[];
+  // columns: Column[];
+  // tasks: Task[];
   kanban: Kanban[];
   editMode: boolean;
   currentKanban: Id;
@@ -24,9 +24,9 @@ interface KanbanState {
 }
 
 const useStore = create<KanbanState>((set) => ({
-  columns: [],
-  tasks: [],
-  kanban: [{ kanbanId: 0, kanbanTitle: "My Kanban", columns: [], tasks: [] }],
+  // columns: [],
+  // tasks: [],
+  kanban: [{ kanbanId: 0, kanbanTitle: "My Kanban", columns: [] }],
   editMode: false,
   currentKanban: 0,
 
@@ -43,12 +43,29 @@ const useStore = create<KanbanState>((set) => ({
       kanban: state.kanban.map((kanban) => (kanban.kanbanId === state.currentKanban ? { ...kanban, columns: kanban.columns.map((col) => (col.id === id ? { ...col, title } : col)) } : kanban)),
     })),
 
-  addTask: (task: Task) => set((state) => ({ tasks: [...state.tasks, task] })),
-  // addTask: (task: Task) => set((state) => ({ kanban: state.kanban.map((kanban) => (kanban.kanbanId === state.currentKanban ? { ...kanban, tasks: [...kanban.tasks, task] } : kanban)) })),
-  deleteTaskCard: (id: Id) => set((state) => ({ tasks: state.tasks.filter((task) => task.id !== id) })),
-  // deleteTaskCard: (id: Id) => set((state) => ({ kanban: state.kanban.map((kanban) => (kanban.kanbanId === state.currentKanban ? { ...kanban, tasks: kanban.tasks.filter((task) => task.id !== id) } : kanban)) })),
-  // updateTaskCard: (id: Id, title: string) => set((state) => ({ kanban: state.kanban.map((kanban) => (kanban.kanbanId === state.currentKanban ? { ...kanban, tasks: kanban.tasks.map((task) => (task.id === id ? { ...task, title } : task)) } : kanban)) })),
-  updateTaskCard: (id: Id, title: string) => set((state) => ({ tasks: state.tasks.map((task) => (task.id === id ? { ...task, title } : task)) })),
+  // addTask: (task: Task) => set((state) => ({ tasks: [...state.tasks, task] })),
+  addTask: (task: Task) =>
+    set((state) => ({
+      kanban: state.kanban.map((kanban) =>
+        kanban.kanbanId === state.currentKanban ? { ...kanban, columns: kanban.columns.map((col) => (col.id === task.columnId ? { ...col, tasks: [...col.task, task] } : col)) } : kanban
+      ),
+    })),
+  deleteTaskCard: (id: Id) =>
+    set((state) => ({
+      kanban: state.kanban.map((kanban) =>
+        kanban.kanbanId === state.currentKanban ? { ...kanban, columns: kanban.columns.map((col) => (col.id === id ? { ...col, tasks: col.task.filter((task) => task.id !== id) } : col)) } : kanban
+      ),
+    })),
+  // deleteTaskCard: (id: Id) => set((state) => ({ tasks: state.tasks.filter((task) => task.id !== id) })),
+  updateTaskCard: (id: Id, title: string) =>
+    set((state) => ({
+      kanban: state.kanban.map((kanban) =>
+        kanban.kanbanId === state.currentKanban
+          ? { ...kanban, columns: kanban.columns.map((col) => (col.id === id ? { ...col, tasks: col.task.map((task) => (task.id === id ? { ...task, title } : task)) } : col)) }
+          : kanban
+      ),
+    })),
+  // updateTaskCard: (id: Id, title: string) => set((state) => ({ tasks: state.tasks.map((task) => (task.id === id ? { ...task, title } : task)) })),
 
   updatecurrentKanban: (id: Id) => set(() => ({ currentKanban: id })),
   addKanban: (kanban: Kanban) => set((state) => ({ kanban: [...state.kanban, kanban] })),
