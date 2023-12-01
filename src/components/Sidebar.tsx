@@ -25,10 +25,20 @@ const Sidebar = () => {
       <SidebarHeader>Kanban 목록</SidebarHeader>
       <SidebarKanbanListWraaper>
         {kanban.map((kanban) => (
-          <SidebarKanbanList key={kanban.kanbanId} onClick={() => handleKanbanSelect(kanban.kanbanId)}>
+          <SidebarKanbanList
+            key={kanban.kanbanId}
+            onClick={() => {
+              handleKanbanSelect(kanban.kanbanId);
+            }}
+          >
             <SidebarKanbanListIconText>{kanban.kanbanTitle}</SidebarKanbanListIconText>
             <IconWrapper>
-              <PencilIconBtn onClick={() => setEditMode(true)}>
+              <PencilIconBtn
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setEditMode(true);
+                }}
+              >
                 <PencilIconBox>
                   <PencilIcon />
                 </PencilIconBox>
