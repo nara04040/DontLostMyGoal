@@ -16,10 +16,11 @@ import {
 } from "./Sidebar.style";
 
 const Sidebar = () => {
-  const { kanban, deleteKanban, setEditMode, updatecurrentKanban } = useStore();
+  const { kanban, kanbanEditMode, deleteKanban, setKanbanEditMode, updatecurrentKanban, updateKanban } = useStore();
   const handleKanbanSelect = (kanbanId: Id) => {
     updatecurrentKanban(kanbanId);
   };
+
   return (
     <SidebarContainer>
       <SidebarHeader>Kanban 목록</SidebarHeader>
@@ -31,12 +32,25 @@ const Sidebar = () => {
               handleKanbanSelect(kanban.kanbanId);
             }}
           >
-            <SidebarKanbanListIconText>{kanban.kanbanTitle}</SidebarKanbanListIconText>
+            {!kanbanEditMode && <SidebarKanbanListIconText>{kanban.kanbanTitle}</SidebarKanbanListIconText>}
+            {kanbanEditMode && (
+              <input
+                type="text"
+                autoFocus
+                value={kanban.kanbanTitle}
+                onChange={(e) => updateKanban(kanban.kanbanId, e.target.value)}
+                onBlur={() => setKanbanEditMode(false)}
+                onKeyDown={(e) => {
+                  if (e.key !== "Enter") return;
+                  setKanbanEditMode(false);
+                }}
+              />
+            )}
             <IconWrapper>
               <PencilIconBtn
                 onClick={(e) => {
                   e.stopPropagation();
-                  setEditMode(true);
+                  setKanbanEditMode(true);
                 }}
               >
                 <PencilIconBox>

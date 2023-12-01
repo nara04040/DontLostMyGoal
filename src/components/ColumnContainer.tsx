@@ -3,11 +3,13 @@ import TrashIcon from "../icons/TrashIcon";
 import PlusIcon from "../icons/PlusIcon";
 import { AddTaskBtn, ColumnCard, ColumnContent, ColumnTitle, IconBox, TrashIconBox, TrashIconBoxBtn } from "./ColumnContainer.style";
 import TaskCard from "./TaskCard";
-import { useState } from "react";
+import useStore from "../stores/kanbanStore";
 
 interface Props {
   column: Column;
   tasks: Task[];
+  columnEditMode: boolean;
+  setColumnEditMode: (editMode: boolean) => void;
   deleteColumn: (id: Id) => void;
   updateColumn: (id: Id, title: string) => void;
   createNewTask: (columnId: Id) => void;
@@ -15,23 +17,22 @@ interface Props {
   updateTaskCard: (id: Id, title: string) => void;
 }
 
-const ColumnContainer = ({ column, tasks, deleteColumn, updateColumn, createNewTask, deleteTaskCard, updateTaskCard }: Props) => {
-  const [editMode, setEditMode] = useState<boolean>(false);
-
+const ColumnContainer = () => {
+  const { kanban, columnEditMode, setColumnEditMode, deleteColumn, updateColumn, addTask, deleteTaskCard, updateTaskCard } = useStore();
   return (
     <ColumnCard>
-      <ColumnTitle onClick={() => setEditMode(true)}>
-        {!editMode && column.title}
-        {editMode && (
+      <ColumnTitle onClick={() => setColumnEditMode(true)}>
+        {!columnEditMode && kanban.map((kanban) => kanban.kanbanTitle)}
+        {columnEditMode && (
           <input
             type="text"
             autoFocus
-            value={column.title}
+            value={kanban.map((kanban) => kanban.kanbanTitle)}
             onChange={(e) => updateColumn(column.id, e.target.value)}
-            onBlur={() => setEditMode(false)}
+            onBlur={() => setColumnEditMode(false)}
             onKeyDown={(e) => {
               if (e.key !== "Enter") return;
-              setEditMode(false);
+              setColumnEditMode(false);
             }}
           />
         )}

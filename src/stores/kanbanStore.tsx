@@ -2,14 +2,17 @@ import { create } from "zustand";
 import { Column, Id, Kanban, Task } from "../types";
 
 interface KanbanState {
-  // columns: Column[];
-  // tasks: Task[];
   kanban: Kanban[];
-  editMode: boolean;
+  kanbanEditMode: boolean;
+  columnEditMode: boolean;
+  taskEditMode: boolean;
   currentKanban: Id;
 
   generatedId: () => Id;
-  setEditMode: (editMode: boolean) => void;
+  setKanbanEditMode: (editMode: boolean) => void;
+  setColumnEditMode: (editMode: boolean) => void;
+  setTaskEditMode: (editMode: boolean) => void;
+
   addColumn: (column: Column) => void;
   deleteColumn: (id: Id) => void;
   updateColumn: (id: Id, title: string) => void;
@@ -24,17 +27,20 @@ interface KanbanState {
 }
 
 const useStore = create<KanbanState>((set) => ({
-  // columns: [],
-  // tasks: [],
   kanban: [{ kanbanId: 0, kanbanTitle: "My Kanban", columns: [] }],
-  editMode: false,
+  kanbanEditMode: false,
+  columnEditMode: false,
+  taskEditMode: false,
   currentKanban: 0,
 
   generatedId: (): Id => {
     return Math.floor(Math.random() * 10001);
   },
-  setEditMode: (editMode: boolean) => set(() => ({ editMode })),
+  setKanbanEditMode: (editMode: boolean) => set(() => ({ kanbanEditMode: editMode })),
+  setColumnEditMode: (editMode: boolean) => set(() => ({ columnEditMode: editMode })),
+  setTaskEditMode: (editMode: boolean) => set(() => ({ taskEditMode: editMode })),
 
+  // column
   addColumn: (column: Column) => set((state) => ({ kanban: state.kanban.map((kanban) => (kanban.kanbanId === state.currentKanban ? { ...kanban, columns: [...kanban.columns, column] } : kanban)) })),
   deleteColumn: (id: Id) =>
     set((state) => ({ kanban: state.kanban.map((kanban) => (kanban.kanbanId === state.currentKanban ? { ...kanban, columns: kanban.columns.filter((col) => col.id !== id) } : kanban)) })),
@@ -43,7 +49,7 @@ const useStore = create<KanbanState>((set) => ({
       kanban: state.kanban.map((kanban) => (kanban.kanbanId === state.currentKanban ? { ...kanban, columns: kanban.columns.map((col) => (col.id === id ? { ...col, title } : col)) } : kanban)),
     })),
 
-  // addTask: (task: Task) => set((state) => ({ tasks: [...state.tasks, task] })),
+  // task
   addTask: (task: Task) =>
     set((state) => ({
       kanban: state.kanban.map((kanban) =>
@@ -56,7 +62,6 @@ const useStore = create<KanbanState>((set) => ({
         kanban.kanbanId === state.currentKanban ? { ...kanban, columns: kanban.columns.map((col) => (col.id === id ? { ...col, tasks: col.task.filter((task) => task.id !== id) } : col)) } : kanban
       ),
     })),
-  // deleteTaskCard: (id: Id) => set((state) => ({ tasks: state.tasks.filter((task) => task.id !== id) })),
   updateTaskCard: (id: Id, title: string) =>
     set((state) => ({
       kanban: state.kanban.map((kanban) =>
@@ -65,8 +70,8 @@ const useStore = create<KanbanState>((set) => ({
           : kanban
       ),
     })),
-  // updateTaskCard: (id: Id, title: string) => set((state) => ({ tasks: state.tasks.map((task) => (task.id === id ? { ...task, title } : task)) })),
 
+  // kanban
   updatecurrentKanban: (id: Id) => set(() => ({ currentKanban: id })),
   addKanban: (kanban: Kanban) => set((state) => ({ kanban: [...state.kanban, kanban] })),
   deleteKanban: (id: Id) => set((state) => ({ kanban: state.kanban.filter((kanban) => kanban.kanbanId !== id) })),

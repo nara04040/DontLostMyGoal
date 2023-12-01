@@ -6,7 +6,7 @@ export const Header = () => {
   const { kanban, currentKanban, addKanban, generatedId } = useStore();
   const currentKanbanTitle = kanban.find((kanban) => kanban.kanbanId === currentKanban)?.kanbanTitle;
 
-  console.log(kanban);
+  // console.log(kanban);
   return (
     <HeaderContainer>
       <LeftSide>
