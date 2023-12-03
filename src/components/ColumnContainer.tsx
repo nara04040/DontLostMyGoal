@@ -5,20 +5,16 @@ import { AddTaskBtn, ColumnCard, ColumnContent, ColumnTitle, IconBox, TrashIconB
 import TaskCard from "./TaskCard";
 import useStore from "../stores/kanbanStore";
 
-interface Props {
-  column: Column;
-  tasks: Task[];
-  columnEditMode: boolean;
-  setColumnEditMode: (editMode: boolean) => void;
-  deleteColumn: (id: Id) => void;
-  updateColumn: (id: Id, title: string) => void;
-  createNewTask: (columnId: Id) => void;
-  deleteTaskCard: (id: Id) => void;
-  updateTaskCard: (id: Id, title: string) => void;
+interface ColumnContainerProps {
+  columId: Id;
 }
 
-const ColumnContainer = () => {
-  const { kanban, columnEditMode, setColumnEditMode, deleteColumn, updateColumn, addTask, deleteTaskCard, updateTaskCard } = useStore();
+const ColumnContainer = ({ columId }: ColumnContainerProps) => {
+  const { kanban, columnEditMode, currentKanban, setColumnEditMode, deleteColumn, updateColumn, addTask, deleteTaskCard, updateTaskCard } = useStore();
+
+  const currentcolumnId = kanban.find((kanban) => kanban.kanbanId === currentKanban)?.columns.find((col) => col.id === columId);
+  console.log(currentcolumnId?.id);
+
   return (
     <ColumnCard>
       <ColumnTitle onClick={() => setColumnEditMode(true)}>
@@ -28,7 +24,7 @@ const ColumnContainer = () => {
             type="text"
             autoFocus
             value={kanban.map((kanban) => kanban.kanbanTitle)}
-            onChange={(e) => updateColumn(column.id, e.target.value)}
+            onChange={(e) => updateColumn(currentcolumnId?.id, e.target.value)}
             onBlur={() => setColumnEditMode(false)}
             onKeyDown={(e) => {
               if (e.key !== "Enter") return;
@@ -36,18 +32,22 @@ const ColumnContainer = () => {
             }}
           />
         )}
-        <TrashIconBoxBtn onClick={() => deleteColumn(column.id)}>
+        <TrashIconBoxBtn
+        //  onClick={() => deleteColumn(column.id)}
+        >
           <TrashIconBox>
             <TrashIcon />
           </TrashIconBox>
         </TrashIconBoxBtn>
       </ColumnTitle>
       <ColumnContent>
-        {tasks.map((task) => (
+        {/* {tasks.map((task) => (
           <TaskCard key={task.id} task={task} deleteTaskCard={deleteTaskCard} updateTaskCard={updateTaskCard} />
-        ))}
+        ))} */}
       </ColumnContent>
-      <AddTaskBtn onClick={() => createNewTask(column.id)}>
+      <AddTaskBtn
+      // onClick={() => createNewTask(column.id)}
+      >
         <IconBox>
           <PlusIcon />
         </IconBox>

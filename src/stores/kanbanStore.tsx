@@ -16,6 +16,7 @@ interface KanbanState {
   addColumn: (column: Column) => void;
   deleteColumn: (id: Id) => void;
   updateColumn: (id: Id, title: string) => void;
+
   addTask: (task: Task) => void;
   deleteTaskCard: (id: Id) => void;
   updateTaskCard: (id: Id, title: string) => void;

@@ -31,21 +31,7 @@ const KanbanBoard = () => {
   return (
     <KanbanBoardContainer>
       <KanbanBoardWrapper>
-        <KanbanBoardBox>
-          {currentKanbanData &&
-            currentKanbanData.columns.map((col) => (
-              <ColumnContainer
-                key={col.id}
-                column={col}
-                tasks={col.task.filter((task) => task.columnId === col.id)}
-                deleteColumn={deleteColumn}
-                updateColumn={updateColumn}
-                createNewTask={createNewTask}
-                deleteTaskCard={deleteTaskCard}
-                updateTaskCard={updateTaskCard}
-              />
-            ))}
-        </KanbanBoardBox>
+        <KanbanBoardBox>{currentKanbanData && currentKanbanData.columns.map((col) => <ColumnContainer key={col.id} columId={col.id} />)}</KanbanBoardBox>
         <KanbanBoardAddColumnBtn onClick={createNewColumn}>
           <IconBox>
             <PlusIcon />
