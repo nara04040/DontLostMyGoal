@@ -4,6 +4,7 @@ import PlusIcon from "../icons/PlusIcon";
 import { AddTaskBtn, ColumnCard, ColumnContent, ColumnTitle, IconBox, TrashIconBox, TrashIconBoxBtn } from "./ColumnContainer.style";
 import TaskCard from "./TaskCard";
 import useStore from "../stores/kanbanStore";
+import { useState } from "react";
 
 interface ColumnContainerProps {
   columId: Id;
@@ -11,24 +12,27 @@ interface ColumnContainerProps {
 
 const ColumnContainer = ({ columId }: ColumnContainerProps) => {
   const { kanban, columnEditMode, currentKanban, setColumnEditMode, deleteColumn, updateColumn, addTask, deleteTaskCard, updateTaskCard } = useStore();
+  const [editMode, setEditMode] = useState(false);
+  const currentcolumnId = kanban.map((kanban) => kanban.columns.find((col) => col.id === columId)?.id).join(" ");
 
-  const currentcolumnId = kanban.find((kanban) => kanban.kanbanId === currentKanban)?.columns.find((col) => col.id === columId);
-  console.log(currentcolumnId?.id);
+  // console.log(kanban.map((kanban) => kanban.columns.find((col) => col.id === columId)?.title));
+  console.log(kanban.map((kanban) => kanban.columns));
 
   return (
     <ColumnCard>
-      <ColumnTitle onClick={() => setColumnEditMode(true)}>
-        {!columnEditMode && kanban.map((kanban) => kanban.kanbanTitle)}
-        {columnEditMode && (
+      <ColumnTitle onClick={() => setEditMode(true)}>
+        {!editMode && kanban.map((kanban) => kanban.columns.find((col) => col.id === columId)?.title)}
+        {editMode && (
           <input
+            id={currentcolumnId}
             type="text"
             autoFocus
-            value={kanban.map((kanban) => kanban.kanbanTitle)}
-            onChange={(e) => updateColumn(currentcolumnId?.id, e.target.value)}
-            onBlur={() => setColumnEditMode(false)}
+            value={kanban.map((kanban) => kanban.columns.find((col) => col.id === columId)?.title).join(" ")}
+            onChange={(e) => updateColumn(currentcolumnId, e.target.value)}
+            onBlur={() => setEditMode(false)}
             onKeyDown={(e) => {
               if (e.key !== "Enter") return;
-              setColumnEditMode(false);
+              setEditMode(false);
             }}
           />
         )}
