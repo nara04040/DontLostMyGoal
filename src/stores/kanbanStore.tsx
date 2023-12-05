@@ -49,9 +49,8 @@ const useStore = create<KanbanState>((set) => ({
     set((state) => {
       const newKanban = state.kanban.map((kanban) => {
         if (kanban.kanbanId === state.currentKanban) {
-          const columnId = kanban.columns.map((col) => col.id).join(" ");
           const newColumns = kanban.columns.map((col) => {
-            if (columnId === id) {
+            if (col.id === Number(id)) {
               return { ...col, title };
             }
             return col;
