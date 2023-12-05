@@ -45,47 +45,21 @@ const useStore = create<KanbanState>((set) => ({
   addColumn: (column: Column) => set((state) => ({ kanban: state.kanban.map((kanban) => (kanban.kanbanId === state.currentKanban ? { ...kanban, columns: [...kanban.columns, column] } : kanban)) })),
   deleteColumn: (id: Id) =>
     set((state) => ({ kanban: state.kanban.map((kanban) => (kanban.kanbanId === state.currentKanban ? { ...kanban, columns: kanban.columns.filter((col) => col.id !== id) } : kanban)) })),
-  // updateColumn: (id: Id, title: string) =>
-  //   set((state) => ({
-  //     kanban: state.kanban.map((kanban) =>
-  //       kanban.kanbanId === state.currentKanban ? { ...kanban, columns: kanban.columns.map((col) => (console.log(col.id, id), col.id === id ? { ...col, title } : col)) } : kanban
-  //     ),
-  //   })),
-
   updateColumn: (id: Id, title: string) =>
     set((state) => {
-      console.log("updateColumn called with id:", id, "and title:", title);
-
-      // 새로운 kanban 배열 생성
       const newKanban = state.kanban.map((kanban) => {
         if (kanban.kanbanId === state.currentKanban) {
-          console.log("Matching kanban found:", kanban);
-
-          // columns 업데이트
-          // console.log(
-          //   "colid와 id가 같나용?",
-          //   kanban.columns.map((col) => {
-          //     col.id === id;
-          //   })
-          // );
-          console.log("kanaban에서의 column id 값", kanban.columns.map((col) => col.id).join(" "));
           const columnId = kanban.columns.map((col) => col.id).join(" ");
-          console.log("id 값", id);
           const newColumns = kanban.columns.map((col) => {
             if (columnId === id) {
-              console.log("Matching column found:", col);
               return { ...col, title };
             }
             return col;
           });
-
-          console.log("Updated columns:", newColumns);
           return { ...kanban, columns: newColumns };
         }
         return kanban;
       });
-
-      console.log("New kanban state:", newKanban);
       return { kanban: newKanban };
     }),
 
