@@ -13,10 +13,7 @@ interface ColumnContainerProps {
 const ColumnContainer = ({ columId }: ColumnContainerProps) => {
   const { kanban, columnEditMode, currentKanban, setColumnEditMode, deleteColumn, updateColumn, addTask, deleteTaskCard, updateTaskCard } = useStore();
   const [editMode, setEditMode] = useState(false);
-  const currentcolumnId = kanban.map((kanban) => kanban.columns.find((col) => col.id === columId)?.id).join(" ");
-
-  // console.log(kanban.map((kanban) => kanban.columns.find((col) => col.id === columId)?.title));
-  console.log(kanban.map((kanban) => kanban.columns));
+  const currentcolumnId = +kanban.map((kanban) => kanban.columns.find((col) => col.id === columId)?.id).join(" ");
 
   return (
     <ColumnCard>
@@ -24,7 +21,7 @@ const ColumnContainer = ({ columId }: ColumnContainerProps) => {
         {!editMode && kanban.map((kanban) => kanban.columns.find((col) => col.id === columId)?.title)}
         {editMode && (
           <input
-            id={currentcolumnId}
+            id={currentcolumnId.toString()}
             type="text"
             autoFocus
             value={kanban.map((kanban) => kanban.columns.find((col) => col.id === columId)?.title).join(" ")}
@@ -37,7 +34,9 @@ const ColumnContainer = ({ columId }: ColumnContainerProps) => {
           />
         )}
         <TrashIconBoxBtn
-        //  onClick={() => deleteColumn(column.id)}
+          onClick={(e) => {
+            e.stopPropagation(), deleteColumn(currentcolumnId);
+          }}
         >
           <TrashIconBox>
             <TrashIcon />

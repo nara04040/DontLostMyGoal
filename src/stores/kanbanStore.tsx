@@ -44,7 +44,19 @@ const useStore = create<KanbanState>((set) => ({
   // column
   addColumn: (column: Column) => set((state) => ({ kanban: state.kanban.map((kanban) => (kanban.kanbanId === state.currentKanban ? { ...kanban, columns: [...kanban.columns, column] } : kanban)) })),
   deleteColumn: (id: Id) =>
-    set((state) => ({ kanban: state.kanban.map((kanban) => (kanban.kanbanId === state.currentKanban ? { ...kanban, columns: kanban.columns.filter((col) => col.id !== id) } : kanban)) })),
+    set((state) => {
+      const newKanban = state.kanban.map((kanban) => {
+        if (kanban.kanbanId === state.currentKanban) {
+          const newColumns = kanban.columns.filter((col) => {
+            return col.id !== Number(id);
+          });
+          return { ...kanban, columns: newColumns };
+        }
+        return kanban;
+      });
+
+      return { kanban: newKanban };
+    }),
   updateColumn: (id: Id, title: string) =>
     set((state) => {
       const newKanban = state.kanban.map((kanban) => {
