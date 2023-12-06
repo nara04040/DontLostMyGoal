@@ -24,7 +24,8 @@ const ColumnContainer = ({ columnId }: ColumnContainerProps) => {
     addTask(newTask);
   };
 
-  console.log(kanban.map((kanban) => kanban.columns.map((col) => col.task)));
+  // console.log(kanban.map((kanban) => kanban.columns.map((col) => col.task)));
+  console.log(kanban);
 
   return (
     <ColumnCard>
@@ -55,9 +56,9 @@ const ColumnContainer = ({ columnId }: ColumnContainerProps) => {
         </TrashIconBoxBtn>
       </ColumnTitle>
       <ColumnContent>
-        {/* {tasks.map((task) => (
-          <TaskCard key={task.id} task={task} deleteTaskCard={deleteTaskCard} updateTaskCard={updateTaskCard} />
-        ))} */}
+        {kanban.map((kanban) =>
+          kanban.columns.find((col) => col.id === columnId)?.task.map((task) => <TaskCard key={task.id} task={task} deleteTaskCard={deleteTaskCard} updateTaskCard={updateTaskCard} />)
+        )}
       </ColumnContent>
       <AddTaskBtn onClick={() => createNewTask(currentcolumnId)}>
         <IconBox>

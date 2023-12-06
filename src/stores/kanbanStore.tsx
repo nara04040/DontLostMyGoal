@@ -79,8 +79,9 @@ const useStore = create<KanbanState>((set) => ({
             // 여기서 console.log를 사용하여 각 column을 확인
 
             // 조건에 따라 새로운 task를 추가하거나 기존 column을 반환
-            return col.id === task.id ? { ...col, tasks: [...col.task, task] } : col;
+            return col.id === task.id ? { ...col, task: [...col.task, task] } : col;
           });
+          console.log(newColumns);
           // 새로운 columns 배열을 포함한 kanban 객체 반환
           return { ...kanban, columns: newColumns };
         }
