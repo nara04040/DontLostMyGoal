@@ -11,20 +11,21 @@ interface ColumnContainerProps {
 }
 
 const ColumnContainer = ({ columnId }: ColumnContainerProps) => {
-  const { kanban, currentKanban, deleteColumn, updateColumn, addTask, deleteTaskCard, updateTaskCard } = useStore();
+  const { kanban, generatedId, deleteColumn, updateColumn, addTask } = useStore();
   const [editMode, setEditMode] = useState(false);
   const currentcolumnId = +kanban.map((kanban) => kanban.columns.find((col) => col.id === columnId)?.id).join(" ");
 
   const createNewTask = (curColumnId: Id) => {
+    const newTaskId = generatedId();
     const newTask: Task = {
-      id: curColumnId,
-      title: `Task ${kanban.map((kanban) => kanban.columns.length)}`,
+      id: newTaskId,
+      columnId: curColumnId,
+      title: `new Task`,
       description: `Task ${kanban.map((kanban) => kanban.columns.length)} description`,
     };
     addTask(newTask);
   };
 
-  // console.log(kanban.map((kanban) => kanban.columns.map((col) => col.task)));
   console.log(kanban);
 
   return (
@@ -55,11 +56,7 @@ const ColumnContainer = ({ columnId }: ColumnContainerProps) => {
           </TrashIconBox>
         </TrashIconBoxBtn>
       </ColumnTitle>
-      <ColumnContent>
-        {kanban.map((kanban) =>
-          kanban.columns.find((col) => col.id === columnId)?.task.map((task) => <TaskCard key={task.id} task={task} deleteTaskCard={deleteTaskCard} updateTaskCard={updateTaskCard} />)
-        )}
-      </ColumnContent>
+      <ColumnContent>{kanban.map((kanban) => kanban.columns.find((col) => col.id === columnId)?.task.map((task) => <TaskCard key={task.id} task={task} />))}</ColumnContent>
       <AddTaskBtn onClick={() => createNewTask(currentcolumnId)}>
         <IconBox>
           <PlusIcon />

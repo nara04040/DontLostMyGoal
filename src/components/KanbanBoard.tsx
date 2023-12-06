@@ -5,7 +5,7 @@ import useStore from "../stores/kanbanStore";
 import { Column } from "../types";
 
 const KanbanBoard = () => {
-  const { kanban, currentKanban, generatedId, addColumn, deleteColumn, updateColumn, addTask, deleteTaskCard, updateTaskCard } = useStore();
+  const { kanban, currentKanban, generatedId, addColumn } = useStore();
 
   const createNewColumn = () => {
     const newColumn: Column = {

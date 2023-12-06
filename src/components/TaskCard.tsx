@@ -1,15 +1,16 @@
 import { useState } from "react";
 import TrashIcon from "../icons/TrashIcon";
-import { Id, Task } from "../types";
+import { Task } from "../types";
 import { TaskContainer, TrashIconBox, TrashIconBoxBtn } from "./TaskCard.style";
+import useStore from "../stores/kanbanStore";
 
 interface Props {
   task: Task;
-  deleteTaskCard: (id: Id) => void;
-  updateTaskCard: (id: Id, title: string) => void;
 }
-const TaskCard = ({ task, deleteTaskCard, updateTaskCard }: Props) => {
+const TaskCard = ({ task }: Props) => {
+  const { deleteTaskCard, updateTaskCard } = useStore();
   const [editMode, setEditMode] = useState<boolean>(false);
+
   return (
     <TaskContainer key={task.id} onClick={() => setEditMode(true)}>
       {!editMode && task.title}
@@ -26,7 +27,11 @@ const TaskCard = ({ task, deleteTaskCard, updateTaskCard }: Props) => {
           }}
         />
       )}
-      <TrashIconBoxBtn onClick={() => deleteTaskCard(task.id)}>
+      <TrashIconBoxBtn
+        onClick={(e) => {
+          e.stopPropagation(), deleteTaskCard(task.id);
+        }}
+      >
         <TrashIconBox>
           <TrashIcon />
         </TrashIconBox>
