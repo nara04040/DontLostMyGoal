@@ -91,11 +91,21 @@ const useStore = create<KanbanState>((set) => ({
     })),
   updateTaskCard: (id: Id, title: string) =>
     set((state) => ({
-      kanban: state.kanban.map((kanban) =>
-        kanban.kanbanId === state.currentKanban
-          ? { ...kanban, columns: kanban.columns.map((col) => (col.id === id ? { ...col, tasks: col.task.map((task) => (task.id === id ? { ...task, title } : task)) } : col)) }
-          : kanban
-      ),
+      kanban: state.kanban.map((kanban) => {
+        if (kanban.kanbanId === state.currentKanban) {
+          const newColumns = kanban.columns.map((col) => {
+            const newTasks = col.task.map((task) => {
+              if (task.id === id) {
+                return { ...task, title };
+              }
+              return task;
+            });
+            return { ...col, task: newTasks };
+          });
+          return { ...kanban, columns: newColumns };
+        }
+        return kanban;
+      }),
     })),
 
   // kanban
