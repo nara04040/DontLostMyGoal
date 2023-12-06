@@ -76,19 +76,12 @@ const useStore = create<KanbanState>((set) => ({
         return kanban;
       }),
     })),
-  // deleteTaskCard: (id: Id) =>
-  //   set((state) => ({
-  //     kanban: state.kanban.map((kanban) =>
-  //       kanban.kanbanId === state.currentKanban ? { ...kanban, columns: kanban.columns.map((col) => (col.id === id ? { ...col, tasks: col.task.filter((task) => task.id !== id) } : col)) } : kanban
-  //     ),
-  //   })),
   deleteTaskCard: (taskId: Id) =>
     set((state) => ({
       kanban: state.kanban.map((kanban) => {
         if (kanban.kanbanId === state.currentKanban) {
           const newColumns = kanban.columns.map((col) => {
-            // 여기서는 col.id를 체크할 필요가 없음
-            const newTasks = col.task.filter((task) => task.id !== taskId); // 태스크 ID를 사용하여 필터링
+            const newTasks = col.task.filter((task) => task.id !== taskId);
             return { ...col, task: newTasks };
           });
           return { ...kanban, columns: newColumns };
