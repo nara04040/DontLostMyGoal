@@ -16,7 +16,7 @@ import {
 } from "./Sidebar.style";
 
 const Sidebar = () => {
-  const { kanban, kanbanEditMode, deleteKanban, setKanbanEditMode, updatecurrentKanban, updateKanban } = useStore();
+  const { kanban, setKanbanEditMode, deleteKanban, updatecurrentKanban, updateKanban } = useStore();
   const handleKanbanSelect = (kanbanId: Id) => {
     updatecurrentKanban(kanbanId);
   };
@@ -32,25 +32,26 @@ const Sidebar = () => {
               handleKanbanSelect(kanban.kanbanId);
             }}
           >
-            {!kanbanEditMode && <SidebarKanbanListIconText>{kanban.kanbanTitle}</SidebarKanbanListIconText>}
-            {kanbanEditMode && (
+            {kanban.isEditing ? (
               <input
                 type="text"
                 autoFocus
                 value={kanban.kanbanTitle}
                 onChange={(e) => updateKanban(kanban.kanbanId, e.target.value)}
-                onBlur={() => setKanbanEditMode(false)}
+                onBlur={() => setKanbanEditMode(false, kanban.kanbanId)}
                 onKeyDown={(e) => {
                   if (e.key !== "Enter") return;
-                  setKanbanEditMode(false);
+                  setKanbanEditMode(false, kanban.kanbanId);
                 }}
               />
+            ) : (
+              <SidebarKanbanListIconText>{kanban.kanbanTitle}</SidebarKanbanListIconText>
             )}
             <IconWrapper>
               <PencilIconBtn
                 onClick={(e) => {
                   e.stopPropagation();
-                  setKanbanEditMode(true);
+                  setKanbanEditMode(true, kanban.kanbanId);
                 }}
               >
                 <PencilIconBox>

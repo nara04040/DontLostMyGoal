@@ -19,11 +19,15 @@ interface KanbanState {
   addKanban: (kanban: Kanban) => void;
   deleteKanban: (id: Id) => void;
   updateKanban: (id: Id, title: string) => void;
+  kanbanEditMode: boolean;
+  setKanbanEditMode: (editMode: boolean, kanbanId?: Id) => void;
 }
 
 const useStore = create<KanbanState>((set) => ({
-  kanban: [{ kanbanId: 0, kanbanTitle: "My Kanban", columns: [] }],
+  kanban: [{ kanbanId: 0, kanbanTitle: "My Kanban", columns: [], isEditing: false }],
   currentKanban: 0,
+  editingKanbanId: null,
+  kanbanEditMode: false,
 
   generatedId: (): Id => {
     return Math.floor(Math.random() * 10001);
@@ -63,7 +67,6 @@ const useStore = create<KanbanState>((set) => ({
     }),
 
   // task
-
   addTask: (task: Task) =>
     set((state) => ({
       kanban: state.kanban.map((kanban) => {
@@ -113,6 +116,7 @@ const useStore = create<KanbanState>((set) => ({
   addKanban: (kanban: Kanban) => set((state) => ({ kanban: [...state.kanban, kanban] })),
   deleteKanban: (id: Id) => set((state) => ({ kanban: state.kanban.filter((kanban) => kanban.kanbanId !== id) })),
   updateKanban: (id: Id, title: string) => set((state) => ({ kanban: state.kanban.map((kanban) => (kanban.kanbanId === id ? { ...kanban, title } : kanban)) })),
+  setKanbanEditMode: (editMode: boolean, kanbanId?: Id) => set((state) => ({ kanban: state.kanban.map((k) => (k.kanbanId === kanbanId ? { ...k, isEditing: editMode } : k)) })),
 }));
 
 export default useStore;
