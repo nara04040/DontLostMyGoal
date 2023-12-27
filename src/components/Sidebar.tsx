@@ -20,7 +20,7 @@ const Sidebar = () => {
   const handleKanbanSelect = (kanbanId: Id) => {
     updatecurrentKanban(kanbanId);
   };
-
+  console.log(kanban);
   return (
     <SidebarContainer>
       <SidebarHeader>Kanban 목록</SidebarHeader>

@@ -115,7 +115,7 @@ const useStore = create<KanbanState>((set) => ({
   updatecurrentKanban: (id: Id) => set(() => ({ currentKanban: id })),
   addKanban: (kanban: Kanban) => set((state) => ({ kanban: [...state.kanban, kanban] })),
   deleteKanban: (id: Id) => set((state) => ({ kanban: state.kanban.filter((kanban) => kanban.kanbanId !== id) })),
-  updateKanban: (id: Id, title: string) => set((state) => ({ kanban: state.kanban.map((kanban) => (kanban.kanbanId === id ? { ...kanban, title } : kanban)) })),
+  updateKanban: (id: Id, title: string) => set((state) => ({ kanban: state.kanban.map((kanban) => (kanban.kanbanId === id ? { ...kanban, kanbanTitle: title } : kanban)) })),
   setKanbanEditMode: (editMode: boolean, kanbanId?: Id) => set((state) => ({ kanban: state.kanban.map((k) => (k.kanbanId === kanbanId ? { ...k, isEditing: editMode } : k)) })),
 }));
 
