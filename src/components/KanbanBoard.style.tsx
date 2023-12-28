@@ -22,11 +22,6 @@ export const KanbanBoardWrapper = styled.div`
 export const KanbanBoardBox = styled.div`
   display: flex;
   gap: 1rem;
-
-  /* @media (min-width: 768px) {
-    flex-wrap: wrap;
-    height: auto;
-  } */
 `;
 
 export const IconBox = styled.svg`
