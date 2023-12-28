@@ -6,17 +6,21 @@ import { Column } from "../types";
 
 const KanbanBoard = () => {
   const { kanban, currentKanban, generatedId, addColumn } = useStore();
+  const currentKanbanData = kanban.find((kanban) => kanban.kanbanId === currentKanban);
 
   const createNewColumn = () => {
     const newColumn: Column = {
       id: generatedId(),
-      title: `Column ${kanban.map((kanban) => kanban.columns.length)} `,
+      title: `Column ${kanban.map((kanban) => (kanban.kanbanId === currentKanban ? kanban.columns.length : null)).join(" ")}`,
       task: [],
     };
     addColumn(newColumn);
   };
-
-  const currentKanbanData = kanban.find((kanban) => kanban.kanbanId === currentKanban);
+  // 전체 kanban에서의 각 column의 배열을 가져온다.
+  // console.log(kanban.map((kanban) => kanban.columns));
+  // 내가 원하는 값은 해당 column의 id와 일치하는 column의 배열의 길이다.
+  console.log(kanban.find((kanban) => (kanban.kanbanId === currentKanban ? kanban.columns.length : null)));
+  // console.log(kanban.find((kanban) => (kanban.kanbanId === currentKanban ? kanban.columns.length : null))?.columns.length);
 
   return (
     <KanbanBoardContainer>

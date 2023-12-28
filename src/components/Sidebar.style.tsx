@@ -90,3 +90,11 @@ export const TrashIconBox = styled.div`
 export const IconWrapper = styled.div`
   display: flex;
 `;
+
+export const ToggleButton = styled.button`
+  position: absolute;
+  right: -8px;
+  top: 40%;
+  width: 10px;
+  height: 10px;
+`;

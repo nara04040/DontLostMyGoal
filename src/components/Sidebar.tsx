@@ -13,6 +13,7 @@ import {
   SidebarKanbanListWraaper,
   TrashIconBox,
   TrashIconBtn,
+  ToggleButton,
 } from "./Sidebar.style";
 
 const Sidebar = () => {
@@ -20,10 +21,10 @@ const Sidebar = () => {
   const handleKanbanSelect = (kanbanId: Id) => {
     updatecurrentKanban(kanbanId);
   };
-  console.log(kanban);
   return (
     <SidebarContainer>
       <SidebarHeader>Kanban 목록</SidebarHeader>
+      <ToggleButton></ToggleButton>
       <SidebarKanbanListWraaper>
         {kanban.map((kanban) => (
           <SidebarKanbanList

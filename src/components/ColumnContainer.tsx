@@ -26,7 +26,8 @@ const ColumnContainer = ({ columnId }: ColumnContainerProps) => {
     addTask(newTask);
   };
 
-  console.log(kanban);
+  // console.log(kanban);
+  // console.log(kanban.map((kanban) => kanban.columns.find((col) => col.id === columnId)?.title).join(" "));
 
   return (
     <ColumnCard>
