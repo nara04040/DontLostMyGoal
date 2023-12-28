@@ -16,12 +16,6 @@ const KanbanBoard = () => {
     };
     addColumn(newColumn);
   };
-  // 전체 kanban에서의 각 column의 배열을 가져온다.
-  // console.log(kanban.map((kanban) => kanban.columns));
-  // 내가 원하는 값은 해당 column의 id와 일치하는 column의 배열의 길이다.
-  // console.log(kanban.find((kanban) => (kanban.kanbanId === currentKanban ? kanban.columns.length : null)));
-  // console.log(kanban.find((kanban) => (kanban.kanbanId === currentKanban ? kanban.columns.length : null))?.columns.length);
-  console.log(kanban.map((kanban) => kanban.columns));
 
   return (
     <KanbanBoardContainer>
