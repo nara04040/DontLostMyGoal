@@ -18,5 +18,4 @@ const MainContainer = styled.div`
   display: flex;
   overflow-x: scroll;
   gap: 1.5rem;
-  margin-left: 260px; // sidebar width를 상수로 빼서 쓰는게 좋을듯
 `;

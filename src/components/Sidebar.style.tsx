@@ -11,9 +11,10 @@ export const SidebarContainer = styled.div<SidebarContainerProps>`
   left: ${(props) => (props.isOpen ? "8px" : "-252px")};
   width: 260px;
   height: 100vh;
+  border-right: 1px dotted #d1d5db;
   align-content: center;
   z-index: 50;
-  border-right: 1px dotted #d1d5db;
+  transition: left 0.3s ease-in-out;
 `;
 
 export const SidebarHeader = styled.div`
@@ -95,10 +96,16 @@ export const IconWrapper = styled.div`
   display: flex;
 `;
 
-export const ToggleButton = styled.button`
+export const ToggleButton = styled.div<SidebarContainerProps>`
   position: absolute;
-  right: -8px;
+  right: -12px;
   top: 40%;
-  width: 10px;
-  height: 10px;
+  width: 24px;
+  height: 24px;
+  background-color: #c2c2c2;
+  border: 1px solid #b4b4b4;
+  border-radius: 50%;
+  cursor: pointer;
+  transform: ${(props) => (props.isOpen ? "rotate(180deg)" : "rotate(0deg)")};
+  transition: transform 0.3s ease-in-out;
 `;

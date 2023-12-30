@@ -1,5 +1,6 @@
 import { useState } from "react";
 import PencilIcon from "../icons/PencilIcon";
+import ArrowIcon from "../icons/ArrowIcon";
 import TrashIcon from "../icons/TrashIcon";
 import useStore from "../stores/kanbanStore";
 import { Id } from "../types";
@@ -30,7 +31,9 @@ const Sidebar = () => {
   return (
     <SidebarContainer isOpen={isOpen}>
       <SidebarHeader>Kanban 목록</SidebarHeader>
-      <ToggleButton onClick={toggleSidebar}></ToggleButton>
+      <ToggleButton onClick={toggleSidebar} isOpen={isOpen}>
+        <ArrowIcon />
+      </ToggleButton>
       <SidebarKanbanListWraaper>
         {kanban.map((kanban) => (
           <SidebarKanbanList
