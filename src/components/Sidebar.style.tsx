@@ -1,10 +1,14 @@
 import styled from "styled-components";
 
-export const SidebarContainer = styled.div`
+type SidebarContainerProps = {
+  isOpen: boolean;
+};
+
+export const SidebarContainer = styled.div<SidebarContainerProps>`
   /* background-color: ${({ theme }) => theme.background}; */
   background-color: #f4f5f7;
   position: absolute;
-  left: 8px;
+  left: ${(props) => (props.isOpen ? "8px" : "-252px")};
   width: 260px;
   height: 100vh;
   align-content: center;

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import PencilIcon from "../icons/PencilIcon";
 import TrashIcon from "../icons/TrashIcon";
 import useStore from "../stores/kanbanStore";
@@ -18,13 +19,18 @@ import {
 
 const Sidebar = () => {
   const { kanban, setKanbanEditMode, deleteKanban, updatecurrentKanban, updateKanban } = useStore();
+  const [isOpen, setIsOpen] = useState(true);
+
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
+  };
   const handleKanbanSelect = (kanbanId: Id) => {
     updatecurrentKanban(kanbanId);
   };
   return (
-    <SidebarContainer>
+    <SidebarContainer isOpen={isOpen}>
       <SidebarHeader>Kanban 목록</SidebarHeader>
-      <ToggleButton></ToggleButton>
+      <ToggleButton onClick={toggleSidebar}></ToggleButton>
       <SidebarKanbanListWraaper>
         {kanban.map((kanban) => (
           <SidebarKanbanList
