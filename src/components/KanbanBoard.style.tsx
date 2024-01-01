@@ -17,6 +17,7 @@ export const KanbanBoardWrapper = styled.div`
   display: flex;
   margin: auto;
   gap: 1rem;
+  overflow-x: scroll;
 `;
 
 export const KanbanBoardBox = styled.div`
@@ -37,7 +38,6 @@ export const KanbanBoardAddColumnBtn = styled.button`
   padding: 1rem;
   gap: 0.5rem;
   border-radius: 0.5rem;
-  /* background-color: var(--mainBackgroundColor); */
   background-color: #cfd1d4;
   border: 2px solid var(--columnBackgroundColor);
   box-shadow: 0 0 0 0px #b93a46;

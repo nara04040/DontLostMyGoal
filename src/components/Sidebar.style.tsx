@@ -5,7 +5,6 @@ type SidebarContainerProps = {
 };
 
 export const SidebarContainer = styled.div<SidebarContainerProps>`
-  /* background-color: ${({ theme }) => theme.background}; */
   background-color: #f4f5f7;
   position: absolute;
   left: ${(props) => (props.isOpen ? "8px" : "-252px")};
